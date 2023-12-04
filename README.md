@@ -10,8 +10,8 @@ The inputs should be added after the MultipleChrom.R file in the command line in
 
 - Directory containing the MS files in mzML format
 - Data frame of target ion masses
-- Retention time start
-- Retention time end 
+- Retention time start (in seconds)
+- Retention time end (in seconds)
 - Data frame describing how the files are related to the sets in the experiment 
 
 ` practice`
