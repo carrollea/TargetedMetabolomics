@@ -27,6 +27,7 @@ There will also be a folder labeled "Compound_IonMass_Spectra". If there are any
 - .pdf file - This is a labeled m/z spectra
 - .csv file - this is an Excel readable file of the spectra
 
+#### Example output
 ```
 - WorkingDirectory
   - Compound1_319.2633_mz
@@ -41,6 +42,7 @@ There will also be a folder labeled "Compound_IonMass_Spectra". If there are any
     - MSFile2.pdf
     - MSFile2_Spectra/
     - peaks.csv
+  - Compound2_315.2319_mz
 ```
 
 ### Explanations of Inputs 
@@ -48,8 +50,10 @@ There will also be a folder labeled "Compound_IonMass_Spectra". If there are any
 The command line only needs the directory of the files. The program will then scan the folder for files ending in ".mzML". To convert the .raw files generated from mass specs you can use proteowizard's MSConvert program. You can also use the GPNS website to convert them as well. The following link has a lot of great resources for data conversion. 
 
 [GNPS File Conversion Tool](https://gnps-quickstart.ucsd.edu/conversion)
+
 [How to use MSConvert via GNPS](https://ccms-ucsd.github.io/GNPSDocumentation/fileconversion/)
-Scroll down to the section labeled "Conversion with MSConvert"
+
+Click the link and scroll down to the section labeled "Conversion with MSConvert"
 
 #### Data frame of target ion masses
 The table below gives you an idea of what the data frame needs to look like. 
