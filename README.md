@@ -14,7 +14,8 @@ The inputs should be added after the MultipleChrom.R file in the command line in
 - Retention time end (in seconds)
 - Data frame describing how the files are related to the sets in the experiment 
 
-` Rscript MultipleChrom.R Examples/MSDataExample Examples/TargetIonExample.csv 0 1000 Examples/InputFilesExample.csv `
+#### Example
+` Rscript MultipleChrom.R  MSDataExample  TargetIonExample.csv  0  1000  InputFilesExample.csv `
 
 ## Outputs 
 The program will produce folders for each target ion. The folders will be labeled from column 1 of the data frame of target masses and will include the target mass (ie pregnenolone_317.2475). In the folder, there will be files and folders named after the file names of the MS .mzML files. There will also be a file called "peaks.csv" file that identifies all the peaks in each MS file. 
@@ -45,7 +46,7 @@ There will also be a folder labeled "Compound_IonMass_Spectra". If there are any
   - Compound2_315.2319_mz
 ```
 
-### Explanations of Inputs 
+## Explanations of Inputs 
 #### Directory of MS files
 The command line only needs the directory of the files. The program will then scan the folder for files ending in ".mzML". To convert the .raw files generated from mass specs you can use proteowizard's MSConvert program. You can also use the GPNS website to convert them as well. The following link has a lot of great resources for data conversion. 
 
