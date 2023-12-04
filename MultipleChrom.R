@@ -16,11 +16,11 @@ if (length(args) < 5){
 }
 
 #args[1] = directory the mzML files are stored in 
-#args[2] = mz of ion searching for to 4 decimal points
+#args[2] = data frame of target ion masses
 #args[3] = retention time start
 #args[4] = retention time end
 #args[5] = data frame describing how the files are related to the sets in the experiment 
-#args[6] = data frame of target ion masses
+ 
 
 invitro<-list.files(path = args[1], pattern = "mzML", full.names = TRUE)
 
