@@ -1,6 +1,14 @@
 #!/usr/bin/env Rscript --vanilla
 
 #The --vanilla on the end, tells Rscript to run without saving or restoring anything in the process. This just keeps things nice a clean.
+
+#define packages to install
+packages <- c('ggplot2', 'dplyr', 'BiocManager')
+biopackages <- c('xcms', 'SummarizedExperiment', 'msPurity', 'Spectra')
+#install all packages that are not already installed
+install.packages(setdiff(packages, rownames(installed.packages())))
+BiocManager::install(setdiff(biopackages, rownames(BiocManager::install())))
+
 suppressMessages(library(xcms)) #will make chromatograms 
 library(SummarizedExperiment)
 suppressMessages(library(msPurity))
