@@ -1,7 +1,5 @@
 #!/usr/bin/env Rscript --vanilla
 
-#The --vanilla on the end, tells Rscript to run without saving or restoring anything in the process. This just keeps things nice a clean.
-
 #define packages to install
 packages <- c('ggplot2', 'dplyr', 'BiocManager')
 biopackages <- c('xcms', 'SummarizedExperiment', 'msPurity', 'Spectra')
@@ -9,6 +7,7 @@ biopackages <- c('xcms', 'SummarizedExperiment', 'msPurity', 'Spectra')
 install.packages(setdiff(packages, rownames(installed.packages())))
 BiocManager::install(setdiff(biopackages, rownames(BiocManager::install())))
 
+#The --vanilla on the end, tells Rscript to run without saving or restoring anything in the process. This just keeps things nice a clean.
 suppressMessages(library(xcms)) #will make chromatograms 
 library(SummarizedExperiment)
 suppressMessages(library(msPurity))
@@ -19,7 +18,7 @@ library(ggplot2)
 args <- commandArgs(trailingOnly = TRUE)
 #The ‘trailingOnly = TRUE’ option means that the first element of ‘args’ is the first argument, instead of the name of the command itself.
 
-if (length(args) < 5){
+if (length(args) < 4){
   stop("You should have three arguments.\n")
 }
 
@@ -28,14 +27,14 @@ if (length(args) < 5){
 #args[3] = retention time start
 #args[4] = retention time end
 #args[5] = data frame describing how the files are related to the sets in the experiment 
- 
+
 
 invitro<-list.files(path = args[1], pattern = "mzML", full.names = TRUE)
 
 mzlist1<-read.csv(args[2], header = TRUE)
 rtr<-c(as.numeric(args[3]), as.numeric(args[4]))
-pd<-read.csv(args[5], header = TRUE)
-
+#pd<-read.csv(args[5], header = TRUE)
+pd<-data.frame(sample_name = sub(basename(invitro), pattern =".mzML", replacement = "", fixed = TRUE),sample_group = sub(basename(invitro), pattern =".mzML", replacement = "", fixed = TRUE), stringsAsFactors = FALSE)
 
 
 label_fun <- function(x) {
@@ -106,7 +105,7 @@ for (c in 2:length(mzlist1)) {
       for (i in 1:length(colid)) {
         Sp<-Spectra(invitro[colid[i]]) #get spectra from one file
         dirID2<-paste(Exp_data$sample_name[colid[i]],"_Spectra", sep="") #Make name for new directory of the set that you're analyzing
-        dir.create(file.path(dirID1, dirID2)) #create a directory with name from above
+   #     dir.create(file.path(dirID1, dirID2)) #create a directory with name from above
         peaksub<-subset.data.frame(peakDF, subset = peakDF$column == colid[i]) #get info for peaks from the peakDF file for only our set of interest
         for (a in 1:nrow(peaksub)) {
           TargetRT<-c(peaksub[a,2], peaksub[a,3]) #selects retention times min and max around the peak that you want to grab the ms2 spectra of
@@ -114,6 +113,7 @@ for (c in 2:length(mzlist1)) {
           SpFilmz<-filterPrecursorMzValues(Sp, mz=mzp, ppm=5) #further filter SpFil spectra for spectra with specific parent ion
           if (length(SpFilmz)>0) {
             for (y in 1:length(SpFilmz)) {
+              dir.create(file.path(dirID1, dirID2)) #create a directory with name from above
               intlist<-unlist(intensity(SpFilmz[y])) #for the filtered spectra get only the intensity
               mzlist<-unlist(mz(SpFilmz[y])) #for the filtered spectra get only the m/z values
               SpFilmzData<-data.frame(MZ=mzlist, Intensity=intlist) #make dataframe of intensity and m/z values
