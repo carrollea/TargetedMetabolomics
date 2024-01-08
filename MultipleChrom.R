@@ -97,7 +97,7 @@ for (c in 2:length(mzlist1)) {
           # scale_y_continuous(limits = c(0, 50000000)) +
           #  stat_smooth(aes(y=Intensity, x=RTimeMin), formula = y ~ s(x, k = 75), method = "gam", se = FALSE, col = cl) +
           #  coord_cartesian(xlim = x, ylim = c(0,40000000)) +
-          geom_text(data = peaksub, label = peaksub$rtminute, x = peaksub$rtminute, y = peaksub$maxo + 5000000, size = 8) +  #Add labels to the graph. can turn off if wanted or use geom_label for a label with a background
+          #geom_text(data = peaksub, label = peaksub$rtminute, x = peaksub$rtminute, y = peaksub$maxo + 5000000, size = 8) +  #Add labels to the graph. can turn off if wanted or use geom_label for a label with a background
           labs(x = "Retention Time (Min)") +
           theme(panel.background = element_rect(fill='transparent'), plot.background = element_rect(fill='transparent', color=NA), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), legend.background = element_rect(fill='transparent'), legend.box.background = element_rect(fill='transparent'), text = element_text(size = 26), axis.line = element_line(color="black", size = 1)) #this makes the background transparent 
         ggsave(temp_plot, file=fileid, width = 20, height = 10, units = "cm") #save the ggplot
